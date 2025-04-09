@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             'role_id' => 2
         ]);
 
-        User::factory(3)->make([
+        User::factory(3)->state([
             'password' => 'password123',
             'role_id' => 1
         ])->create();
