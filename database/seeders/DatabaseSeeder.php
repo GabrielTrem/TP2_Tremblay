@@ -30,6 +30,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'last_name' => 'Reeves',
             'first_name' => 'Keanu',
+            'role_id' => 2
+        ]);
+
+        User::factory(3)->make([
+            'password' => 'password123',
             'role_id' => 1
         ]);
 
