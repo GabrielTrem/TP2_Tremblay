@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Critic;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,10 +34,11 @@ class DatabaseSeeder extends Seeder
             'role_id' => 2
         ]);
 
+        //normal user
         User::factory(3)->make([
             'password' => 'password123',
             'role_id' => 1
-        ]);
+        ])->create();
 
 		//Ne sera pas fait dans le cadre de ce TP, les users et les critiques seront créés par vous
         //User::factory(10)->has(Critic::factory(30))->create();
