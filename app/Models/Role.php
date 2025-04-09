@@ -11,7 +11,7 @@ class Role extends Model
         'name'
     ];
 
-    public function films()
+    public function users()
     {
         return $this->hasMany('App\Models\Users');
     }
