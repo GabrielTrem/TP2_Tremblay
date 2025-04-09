@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::factory(3)->state([
-            'password' => 'password123',
+            'password' => Hash::make('password123'),
             'role_id' => 1
         ])->create();
     }
