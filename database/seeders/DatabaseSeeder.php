@@ -23,6 +23,16 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class
         ]);
 
+        //admin user
+        User::create([
+            'login' => 'adminUser',
+            'password' => Hash::make('adminPassword'),
+            'email' => 'admin@gmail.com',
+            'last_name' => 'Reeves',
+            'first_name' => 'Keanu',
+            'role_id' => 1
+        ]);
+
 		//Ne sera pas fait dans le cadre de ce TP, les users et les critiques seront créés par vous
         //User::factory(10)->has(Critic::factory(30))->create();
     }
