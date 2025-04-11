@@ -16,4 +16,11 @@ Route::middleware('throttle:5,1')->group( function(){
     Route::post('/signup', 'App\Http\Controllers\AuthController@register');
     Route::post('/signin', 'App\Http\Controllers\AuthController@login'); 
 });
-Route::get('/films', 'App\Http\Controllers\FilmController@index');
+#Route::post('/films', 'App\Http\Controllers\FilmController@store');
+#Route::put('/films/{id}', 'App\Http\Controllers\FilmController@update');
+#Route::delete('/films/{id}', 'App\Http\Controllers\FilmController@destroy');
+
+#Route::post('/critic', 'App\Http\Controllers\CriticController@store');
+
+#Route::get('/user', 'App\Http\Controllers\UserController@show');
+#Route::patch('/user', 'App\Http\Controllers\UserController@update');
