@@ -8,7 +8,7 @@ class NotAdminException extends Exception
 {
     public function status()
     {
-        return UNAUTHORIZED;
+        return FORBIDDEN;
     }
     public function message()
     {
