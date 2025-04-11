@@ -8,13 +8,16 @@ use App\Repository\RepositoryInterface;
 use App\Repository\FilmRepositoryInterface;
 use App\Repository\CriticRepositoryInterface;
 use App\Repository\UserRepositoryInterface;
+use App\Repository\RoleRepositoryInterface;
 use App\Repository\Eloquent\BaseRepository;
 use App\Repository\Eloquent\FilmRepository;
 use App\Repository\Eloquent\CriticRepository;
 use App\Repository\Eloquent\UserRepository;
+use App\Repository\Eloquent\RoleRepository;
 use App\Models\Film;
 use APp\Models\Critic;
 use APp\Models\User;
+use APp\Models\Role;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +35,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->singleton(UserRepositoryInterface::class, function (Application $app) {
             return new UserRepository(new User());
+        });
+        $this->app->singleton(RoleRepositoryInterface::class, function (Application $app) {
+            return new RoleRepository(new Role());
         });
     }
 
