@@ -16,7 +16,6 @@ class BaseRepository implements RepositoryInterface
 
     /**
     * @param array $content
-    *
     * @return Model
     */
     public function create(array $content)
