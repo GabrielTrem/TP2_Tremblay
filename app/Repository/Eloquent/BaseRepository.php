@@ -15,20 +15,20 @@ class BaseRepository implements RepositoryInterface
     }
 
     /**
-    * @param array $attributes
+    * @param array $content
     *
     * @return Model
     */
-    public function create(array $attributes): Model
+    public function create(array $content)
     {
-        return $this->model->create($attributes);
+        return $this->model->create($content);
     }
  
     /**
     * @param $id
     * @return Model
     */
-    public function getById(int $id): ?Model
+    public function getById(int $id)
     {
         return $this->model->find($id);
     }
@@ -43,6 +43,11 @@ class BaseRepository implements RepositoryInterface
         {
             return $this->model->all();
         }
+    }
+
+    public function update(int $id, array $content)
+    {
+        
     }
 
     public function delete(int $id)
