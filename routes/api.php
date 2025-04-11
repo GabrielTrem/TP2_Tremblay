@@ -23,4 +23,4 @@ Route::middleware('throttle:5,1')->group( function(){
 #Route::post('/critic', 'App\Http\Controllers\CriticController@store');
 
 #Route::get('/user', 'App\Http\Controllers\UserController@show');
-#Route::post('/user', 'App\Http\Controllers\UserController@update');
+#Route::patch('/user', 'App\Http\Controllers\UserController@update');
