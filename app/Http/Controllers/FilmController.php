@@ -10,14 +10,20 @@ use App\Repository\FilmRepositoryInterface;
 class FilmController extends Controller
 {   
     private FilmRepositoryInterface $filmRepository;
+    private RoleRepositoryInterface $roleRepository;
 
-    public function __construct(FilmRepositoryInterface $filmRepository){
+    public function __construct(FilmRepositoryInterface $filmRepository, $roleRepository){
         $this->filmRepository = $filmRepository;
+        $this->roleRepository = $roleRepository;
     }
 
     public function store(Request $request)
     {
-        $film = $filmRepository->create($request->validated());
+        $validatedData = $request->validated();
+        $user = $filmRepository->create([
+            $validatedData,
+            'role_id' => $roleRepository->getIdByName('admin')
+        ]);
         return (new FilmResource($film))->response()->setStatusCode(CREATED);
     }
 
