@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\RoleRepositoryInterface;
 use App\Exceptions\NotAdminException;
+use Illuminate\Support\Facades\Auth;
 
 class AdminMiddleware
 {
@@ -24,7 +25,7 @@ class AdminMiddleware
     {
         try{
             $user = Auth::user();
-            if($user->role_id != $roleRepository->getIdByName('admin')){
+            if($user->role_id != $this->roleRepository->getIdByName('admin')){
                 throw new NotAdminException;
             }
             return $next($request);

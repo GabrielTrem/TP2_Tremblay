@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Resources\FilmResource;
 use App\Models\Film;
 use App\Repository\FilmRepositoryInterface;
-use App\Repository\RoleRepositoryInterface;
 
 class FilmController extends Controller
 {   
@@ -42,7 +41,7 @@ class FilmController extends Controller
     public function update(Request $request, string $id)
     {
         try{
-            $film = $filmRepository->update($id, $request->validated());
+            $film = $this->filmRepository->update($id, $request->all());
             return (new FilmResource($film))->response()->setStatusCode(OK);
         }
         catch(QueryException $ex){

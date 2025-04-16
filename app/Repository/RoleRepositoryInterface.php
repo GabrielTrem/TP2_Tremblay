@@ -6,7 +6,7 @@ use App\Repository\RepositoryInterface;
 
 interface RoleRepositoryInterface extends RepositoryInterface
 {
-    public function getByName(string $name);
+    public function getIdByName(string $name);
 }
 
 ?>

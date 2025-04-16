@@ -2,10 +2,10 @@
 
 namespace App\Repository\Eloquent;
 
-use App\Repository\UserRepositoryInterface;
+use App\Repository\RoleRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 
-class UserRepository extends BaseRepository implements UserRepositoryInterface
+class RoleRepository extends BaseRepository implements RoleRepositoryInterface
 {
     public function getIdByName(string $name)
     {

@@ -18,7 +18,7 @@ class BaseRepository implements RepositoryInterface
     * @param array $content
     * @return Model
     */
-    public function create(array $content)
+    public function create(array $content) : Model
     {
         return $this->model->create($content);
     }
@@ -27,7 +27,7 @@ class BaseRepository implements RepositoryInterface
     * @param $id
     * @return Model
     */
-    public function getById(int $id)
+    public function getById(int $id) : ?Model
     {
         return $this->model->findOrFail($id);
     }
@@ -44,10 +44,15 @@ class BaseRepository implements RepositoryInterface
         }
     }
 
-    public function update(int $id, array $content)
+    /**
+    * @param $id
+    * @param $content
+    * @return Model
+    */
+    public function update(int $id, array $content) : Model
     {
-        $item = $this->model-findOrFail($id);
-        $item->update($content);
+        $item = $this->model->findOrFail($id);
+        return $item->update($content);
     }
 
     public function delete(int $id)
