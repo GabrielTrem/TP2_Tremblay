@@ -6,25 +6,27 @@ use Illuminate\Http\Request;
 use App\Http\Resources\FilmResource;
 use App\Models\Film;
 use App\Repository\FilmRepositoryInterface;
+use App\Repository\RoleRepositoryInterface;
 
 class FilmController extends Controller
 {   
     private FilmRepositoryInterface $filmRepository;
-    private RoleRepositoryInterface $roleRepository;
 
-    public function __construct(FilmRepositoryInterface $filmRepository, $roleRepository){
+    public function __construct(FilmRepositoryInterface $filmRepository){
         $this->filmRepository = $filmRepository;
-        $this->roleRepository = $roleRepository;
     }
 
     public function store(Request $request)
     {
-        $validatedData = $request->validated();
-        $user = $filmRepository->create([
-            $validatedData,
-            'role_id' => $roleRepository->getIdByName('admin')
-        ]);
-        return (new FilmResource($film))->response()->setStatusCode(CREATED);
+        try
+        {
+            $film = $this->filmRepository->create($request->validated());
+            return (new FilmResource($film))->response()->setStatusCode(CREATED);
+        }
+        catch(Exception $ex)
+        {
+            abort(SERVER_ERROR, $ex->getMessage());
+        }  
     }
 
     public function update(Request $request, string $id)
