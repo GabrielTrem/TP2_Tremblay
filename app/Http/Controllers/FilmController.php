@@ -16,6 +16,16 @@ class FilmController extends Controller
         $this->filmRepository = $filmRepository;
     }
 
+    //For test
+    public function index(){
+        try{
+            return $this->filmRepository->getAll();
+        }
+        catch (Exception $ex){
+            abort(SERVER_ERROR, $ex->getMessage());
+        }
+    }
+
     public function store(Request $request)
     {
         try
