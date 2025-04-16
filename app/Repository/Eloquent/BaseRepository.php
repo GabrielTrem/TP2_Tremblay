@@ -29,7 +29,7 @@ class BaseRepository implements RepositoryInterface
     */
     public function getById(int $id)
     {
-        return $this->model->find($id);
+        return $this->model->findOrFail($id);
     }
 
     public function getAll(int $perPage = 0) 
