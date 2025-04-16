@@ -15,10 +15,24 @@ class FilmController extends Controller
         $this->filmRepository = $filmRepository;
     }
 
-    public function store(StoreUserRequest $request)
+    public function store(Request $request)
     {
         $film = $filmRepository->create($request->validated());
-        return (new UserResource($user))->response()->setStatusCode(CREATED);
+        return (new FilmResource($film))->response()->setStatusCode(CREATED);
+    }
+
+    public function update(Request $request, string $id)
+    {
+        try{
+            $film = $filmRepository->update($id, $request->validated());
+            return (new FilmResource($film))->response()->setStatusCode(OK);
+        }
+        catch(QueryException $ex){
+            abort(NOT_FOUND, 'Film Not Found');
+        }
+        catch(Exception $ex){
+            abort(SERVER, $ex->getMessage());
+        }
     }
 
     public function destroy(string $id)
@@ -26,8 +40,11 @@ class FilmController extends Controller
         try {
             $filmRepository->delete($id);
             return response()->noContent();
-        } catch (Exception $e) {
-            abort(NOT_FOUND, $e->getMessage());
+        } catch (QueryException $ex) {
+            abort(NOT_FOUND, 'Film Not Found');
+        }
+        catch (Exception $ex) {
+            abort(SERVER, $ex->getMessage());
         }
     }
 }
