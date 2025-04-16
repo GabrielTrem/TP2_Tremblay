@@ -23,7 +23,7 @@ class CriticController extends Controller
             return (new CriticResource($critic))->response()->setStatusCode(CREATED);
         }
         catch (Exception $ex){
-            abort(SERVER, $ex->getMessage());
+            abort(SERVER_ERROR, $ex->getMessage());
         }
     }
 }

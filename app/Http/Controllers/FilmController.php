@@ -39,7 +39,7 @@ class FilmController extends Controller
             abort(NOT_FOUND, 'Film Not Found');
         }
         catch(Exception $ex){
-            abort(SERVER, $ex->getMessage());
+            abort(SERVER_ERROR, $ex->getMessage());
         }
     }
 
@@ -52,7 +52,7 @@ class FilmController extends Controller
             abort(NOT_FOUND, 'Film Not Found');
         }
         catch (Exception $ex) {
-            abort(SERVER, $ex->getMessage());
+            abort(SERVER_ERROR, $ex->getMessage());
         }
     }
 }

@@ -31,4 +31,20 @@ class UserController extends Controller
             abort(SERVER_ERROR, $ex->getMessage());
         }
     }
+
+    public function update(Request $request)
+    {
+        try{
+            $user = Auth::user();
+            $validatedData =$request->validated();
+            $updatedUser = $userRepository->update($id, [ 'password' => Hash::make($validatedData['password'])]);
+            return (new UserResource($updatedUser))->response()->setStatusCode(OK);
+        }
+        catch(QueryException $ex){
+            abort(NOT_FOUND, "User Not Found");
+        }
+        catch(Exception $ex){
+            abort(SERVER_ERROR, $ex->getMessage());
+        }
+    }
 }
