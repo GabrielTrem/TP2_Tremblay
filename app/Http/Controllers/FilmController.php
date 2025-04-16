@@ -15,6 +15,12 @@ class FilmController extends Controller
         $this->filmRepository = $filmRepository;
     }
 
+    public function store(StoreUserRequest $request)
+    {
+        $film = $filmRepository->create($request->validated());
+        return (new UserResource($user))->response()->setStatusCode(CREATED);
+    }
+
     public function destroy(string $id)
     {
         try {
