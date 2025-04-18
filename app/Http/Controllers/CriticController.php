@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Critic;
 use App\Http\Resources\CriticResource;
 use App\Repository\CriticRepositoryInterface;
+use App\Http\Requests\CreateCriticRequest;
 
 class CriticController extends Controller
 {
@@ -15,10 +16,10 @@ class CriticController extends Controller
         $this->criticRepository = $criticRepository;
     }
 
-    public function store(Request $request)
+    public function store(CreateCriticRequest $request)
     {
         try{
-            $critic = $this->criticRepository->create($request->all());
+            $critic = $this->criticRepository->create($request->validated());
             return (new CriticResource($critic))->response()->setStatusCode(CREATED);
         }
         catch (Exception $ex){

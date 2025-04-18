@@ -7,6 +7,7 @@ use App\Http\Resources\UserResource;
 use App\Repository\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UpdateUserPasswordRequest;
 
 class UserController extends Controller
 {
@@ -29,11 +30,11 @@ class UserController extends Controller
         }
     }
 
-    public function update(Request $request)
+    public function update(UpdateUserPasswordRequest $request)
     {
         try{
             $userId = Auth::user()->id;
-            $validatedData =$request->all();
+            $validatedData =$request->validated();
             $user = $this->userRepository->update($userId, [ 'password' => Hash::make($validatedData['password'])]);
             return (new UserResource($user))->response()->setStatusCode(OK);
         }

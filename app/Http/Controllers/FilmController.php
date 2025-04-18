@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Resources\FilmResource;
 use App\Models\Film;
 use App\Repository\FilmRepositoryInterface;
+use App\Http\Requests\CreateFilmRequest;
+use App\Http\Requests\UpdateFilmRequest;
 
 class FilmController extends Controller
 {   
@@ -25,11 +27,11 @@ class FilmController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function store(CreateFilmRequest $request)
     {
         try
         {
-            $film = $this->filmRepository->create($request->all());
+            $film = $this->filmRepository->create($request->validated());
             return (new FilmResource($film))->response()->setStatusCode(CREATED);
         }
         catch(Exception $ex)
@@ -38,10 +40,10 @@ class FilmController extends Controller
         }  
     }
 
-    public function update(Request $request, string $id)
+    public function update(UpdateFilmRequest $request, string $id)
     {
         try{
-            $film = $this->filmRepository->update($id, $request->all());
+            $film = $this->filmRepository->update($id, $request->validated());
             return (new FilmResource($film))->response()->setStatusCode(OK);
         }
         catch(QueryException $ex){
