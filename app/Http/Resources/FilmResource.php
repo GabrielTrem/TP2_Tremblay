@@ -19,7 +19,6 @@ class FilmResource extends JsonResource
     {
         return
         [
-          
             'title' => $this->title,
             'release_year' => $this->release_year,
             'length' => $this->length,
