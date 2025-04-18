@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
-use App\Models\User;
+use App\Repository\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -15,16 +15,12 @@ class UserController extends Controller
         $this->userRepository = $userRepository;
     }
 
-    public function show(string $id)
+    public function show()
     {
         try
         {
             $user = Auth::user();
-            return (new FilmResource($this->userRepository->getById($user->id)))->response()->setStatusCode(OK);        
-        }
-        catch(QueryException $ex)
-        {
-            abort(NOT_FOUND, "User Not found");
+            return (new UserResource($this->userRepository->getById($user->id)))->response()->setStatusCode(OK);        
         }
         catch(Exception $ex)
         {
