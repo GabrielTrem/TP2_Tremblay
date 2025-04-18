@@ -4,22 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Critic;
-use App\Resources\CriticResource;
+use App\Http\Resources\CriticResource;
 use App\Repository\CriticRepositoryInterface;
 
 class CriticController extends Controller
 {
+    private CriticRepositoryInterface $criticRepository;
 
-    private FilmRepositoryInterface $filmRepository;
-
-    public function __construct(CriticRepositoryInterface $CriticRepository){
+    public function __construct(CriticRepositoryInterface $criticRepository){
         $this->criticRepository = $criticRepository;
     }
 
     public function store(Request $request)
     {
         try{
-            $critic = $this->criticRepository->create($request->validated());
+            $critic = $this->criticRepository->create($request->all());
             return (new CriticResource($critic))->response()->setStatusCode(CREATED);
         }
         catch (Exception $ex){

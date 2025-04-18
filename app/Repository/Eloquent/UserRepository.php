@@ -13,11 +13,12 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     //     $item->update(['password' => $newPassword]);
     // }
 
-    // public function getCriticByFilmId(int $id)
-    // {
-    //     $critics = $this->model->critics();
-    //     return $critics->where('film_id', $id)->first();
-    // }
+    public function userHasCriticForFilm(string $user_id, string $film_id)
+    {
+        $user = $this->model->findOrFail($user_id);
+        $critics = $user->critics();
+        return $critics->where('film_id', $film_id)->exists();
+    }
 }
 
 ?>

@@ -14,7 +14,7 @@ Route::middleware('throttle:60,1')->group( function(){
             Route::put('/films/{id}', 'App\Http\Controllers\FilmController@update');
             Route::delete('/films/{id}', 'App\Http\Controllers\FilmController@destroy');
         });
-        Route::post('/critic', 'App\Http\Controllers\CriticController@store')->middleware(OneCriticPerFilmMiddleware::class);
+        Route::post('/critics', 'App\Http\Controllers\CriticController@store')->middleware(OneCriticPerFilmMiddleware::class);
         Route::get('/user', 'App\Http\Controllers\UserController@show');
         Route::patch('/user', 'App\Http\Controllers\UserController@update');
     });
