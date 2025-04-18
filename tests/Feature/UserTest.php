@@ -19,7 +19,7 @@ class UserTest extends TestCase
         $user = Auth::user();
 
         $response = $this->getJson("/api/user");
-        
+
         $response->assertStatus(OK)
                 ->assertJsonFragment(
                     [
@@ -60,7 +60,6 @@ class UserTest extends TestCase
         $this->seed();
         $this->postJson('/api/signin', ['login' => 'adminUser', 'password' => 'adminPassword']);
         $user = Auth::user();
-
         $json = [
             "password" => "newPassword",
             "password_confirmation" => "newPassword"
@@ -76,15 +75,13 @@ class UserTest extends TestCase
                         "first_name" => $user->first_name,
                         "last_name" => $user->last_name
                     ]
-                );
-                
+                );    
         $this->assertDatabaseHas('users', [
             "login" => "adminUser",
             "email" => $user->email,
             "first_name" => $user->first_name,
             "last_name" => $user->last_name
         ]); 
-
         $user->refresh();
         $this->assertTrue(Hash::check($json['password'], $user->password));
     }
@@ -94,7 +91,6 @@ class UserTest extends TestCase
         $this->seed();
         $this->postJson('/api/signin', ['login' => 'adminUser', 'password' => 'adminPassword']);
         $user = Auth::user();
-
         $json = [
             "password" => "newPassword",
             "password_confirmation" => "new"
@@ -108,7 +104,6 @@ class UserTest extends TestCase
     public function test_whenUpdatingUserPasswordWithValidPasswordAndConfirmationWhileNotAuthenticated_thenReturnUnauthorized(): void
     {
         $this->seed();
-
         $json = [
             "password" => "newPassword",
             "password_confirmation" => "newPassword"
@@ -123,7 +118,6 @@ class UserTest extends TestCase
     {
         $this->seed();
         $this->postJson('/api/signin', ['login' => 'adminUser', 'password' => 'adminPassword']);
-
         $json = [
             "password" => "newPassword",
             "password_confirmation" => "newPassword"

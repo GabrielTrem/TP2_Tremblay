@@ -15,7 +15,6 @@ class FilmTest extends TestCase
     {
         $this->seed();
         $this->postJson('/api/signin', ['login' => 'adminUser', 'password' => 'adminPassword']);
-
         $json = [
             "title" => "Potato Film", 
             "release_year" => 1990,
@@ -42,7 +41,6 @@ class FilmTest extends TestCase
                         "language_id" => $json['language_id']
                     ]
                  );
-
         $this->assertDatabaseHas('films', [
             "title" => $json['title'], 
             "release_year" => $json['release_year'],
@@ -59,7 +57,6 @@ class FilmTest extends TestCase
     {
         $this->seed();
         $this->postJson('/api/signin', ['login' => 'adminUser', 'password' => 'adminPassword']);
-
         $json = [
             "title" => "Potato Film", 
             "release_year" => 1990,
@@ -72,7 +69,6 @@ class FilmTest extends TestCase
         $response = $this->postJson('/api/films', $json);
 
         $response->assertStatus(INVALID_DATA);
-
         $this->assertDatabaseMissing('films', [
             "title" => $json['title'], 
             "release_year" => $json['release_year'],
@@ -87,7 +83,6 @@ class FilmTest extends TestCase
     {
         $this->seed();
         $this->postJson('/api/signin', ['login' => 'user', 'password' => 'password']);
-
         $json = [
             "title" => "Potato Film", 
             "release_year" => 1990,
@@ -102,7 +97,6 @@ class FilmTest extends TestCase
         $response = $this->postJson('/api/films', $json);
 
         $response->assertStatus(FORBIDDEN);
-
         $this->assertDatabaseMissing('films', [
             "title" => $json['title'], 
             "release_year" => $json['release_year'],
@@ -118,7 +112,6 @@ class FilmTest extends TestCase
     public function test_whenCreatingFilmAndNotAuthenticated_thenReturnUnauthorized(): void
     {
         $this->seed();
-
         $json = [
             "title" => "Potato Film", 
             "release_year" => 1990,
@@ -133,7 +126,6 @@ class FilmTest extends TestCase
         $response = $this->postJson('/api/films', $json);
 
         $response->assertStatus(UNAUTHORIZED);
-
         $this->assertDatabaseMissing('films', [
             "title" => $json['title'], 
             "release_year" => $json['release_year'],
@@ -150,7 +142,6 @@ class FilmTest extends TestCase
     {
         $this->seed();
         $this->postJson('/api/signin', ['login' => 'adminUser', 'password' => 'adminPassword']);
-
         $json = [
             "title" => "Potato Film", 
             "release_year" => 1990,
@@ -176,7 +167,6 @@ class FilmTest extends TestCase
         $this->seed();
         $id = 1;
         $this->postJson('/api/signin', ['login' => 'adminUser', 'password' => 'adminPassword']);
-
         $json = [
             "title" => "Potato Film", 
             "release_year" => 1990,
@@ -203,7 +193,6 @@ class FilmTest extends TestCase
                         "language_id" => $json['language_id']
                     ]
                  );
-
         $this->assertDatabaseHas('films', [
             "id" => $id,
             "title" => $json['title'], 
@@ -222,7 +211,6 @@ class FilmTest extends TestCase
         $this->seed();
         $id = 1;
         $this->postJson('/api/signin', ['login' => 'adminUser', 'password' => 'adminPassword']);
-
         $json = [
             "title" => "Potato Film", 
             "release_year" => 1990,
@@ -235,7 +223,6 @@ class FilmTest extends TestCase
         $response = $this->putJson("/api/films/$id", $json);
 
         $response->assertStatus(INVALID_DATA);
-
         $this->assertDatabaseMissing('films', [
             "id" => $id,
             "title" => $json['title'], 
@@ -252,7 +239,6 @@ class FilmTest extends TestCase
         $this->seed();
         $id = 1;
         $this->postJson('/api/signin', ['login' => 'user', 'password' => 'password']);
-
         $json = [
             "title" => "Potato Film", 
             "release_year" => 1990,
@@ -267,7 +253,6 @@ class FilmTest extends TestCase
         $response = $this->putJson("/api/films/$id", $json);
 
         $response->assertStatus(FORBIDDEN);
-
         $this->assertDatabaseMissing('films', [
             "id" => $id,
             "title" => $json['title'], 
@@ -285,7 +270,6 @@ class FilmTest extends TestCase
     {
         $this->seed();
         $id = 1;
-
         $json = [
             "title" => "Potato Film", 
             "release_year" => 1990,
@@ -300,7 +284,6 @@ class FilmTest extends TestCase
         $response = $this->putJson("/api/films/$id", $json);
 
         $response->assertStatus(UNAUTHORIZED);
-
         $this->assertDatabaseMissing('films', [
             "id" => $id,
             "title" => $json['title'], 
@@ -319,7 +302,6 @@ class FilmTest extends TestCase
         $this->seed();
         $id = 1;
         $this->postJson('/api/signin', ['login' => 'adminUser', 'password' => 'adminPassword']);
-
         $json = [
             "title" => "Potato Film", 
             "release_year" => 1990,
@@ -349,7 +331,6 @@ class FilmTest extends TestCase
         $response = $this->delete("/api/films/$id");
 
         $response->assertStatus(NO_CONTENT);
-
         $this->assertDatabaseMissing('films', [
             "id" => $id
         ]);
@@ -375,7 +356,6 @@ class FilmTest extends TestCase
         $response = $this->delete("/api/films/$id");
 
         $response->assertStatus(FORBIDDEN);
-
         $this->assertDatabaseHas('films', [
             "id" => $id
         ]);
@@ -386,12 +366,9 @@ class FilmTest extends TestCase
         $this->seed();
         $id = 1;
 
-        $response = $this->withHeaders([
-            'Accept' => 'application/json'
-        ])->delete("/api/films/$id"); //Me renvoyais un 500 aussi-non. Route [login] not defined
+        $response = $this->deleteJson("/api/films/$id");
 
         $response->assertStatus(UNAUTHORIZED);
-
         $this->assertDatabaseHas('films', [
             "id" => $id
         ]);
@@ -403,7 +380,6 @@ class FilmTest extends TestCase
         $id = 1;
         $this->postJson('/api/signin', ['login' => 'adminUser', 'password' => 'adminPassword']);
 
-        
         for($i = 0; $i < THROTTLE_LIMIT; $i++){
             $film_id = $i + 1;
             $response = $this->delete("/api/films/$film_id");

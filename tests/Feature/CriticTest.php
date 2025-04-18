@@ -10,8 +10,6 @@ use App\Models\Film;
 use App\Models\Critic;
 use App\Models\Language;
 
-define('THROTTLE_LIMIT', 60);
-
 class CriticTest extends TestCase
 {
 
@@ -20,7 +18,6 @@ class CriticTest extends TestCase
     {
         $this->seed();
         $this->postJson('/api/signin', ['login' => 'adminUser', 'password' => 'adminPassword']);
-
         $json = [
             "user_id" => 1, 
             "film_id" => 7,
@@ -39,7 +36,6 @@ class CriticTest extends TestCase
                         'comment' => $json['comment']
                     ]
                  );
-
         $this->assertDatabaseHas('critics', [
             'user_id' => $json['user_id'],
             'film_id' => $json['film_id']
@@ -50,7 +46,6 @@ class CriticTest extends TestCase
     {
         $this->seed();
         $this->postJson('/api/signin', ['login' => 'adminUser', 'password' => 'adminPassword']);
-
         $json = [
             "user_id" => 1, 
             "film_id" => 7,
@@ -60,7 +55,6 @@ class CriticTest extends TestCase
         $response = $this->postJson('/api/critics', $json);
 
         $response->assertStatus(INVALID_DATA);
-
         $this->assertDatabaseMissing('critics', [
             'user_id' => $json['user_id'],
             'film_id' => $json['film_id']
@@ -71,7 +65,6 @@ class CriticTest extends TestCase
     {
         $this->seed();
         $this->postJson('/api/signin', ['login' => 'adminUser', 'password' => 'adminPassword']);
-
         $json = [
             "user_id" => 1, 
             "film_id" => 7,
@@ -88,7 +81,6 @@ class CriticTest extends TestCase
     public function test_whenCreatingCriticWithValidInformationButNotAuthenticated_thenReturnUnauthorized(): void
     {
         $this->seed();
-
         $json = [
             "user_id" => 1, 
             "film_id" => 7,
@@ -99,7 +91,6 @@ class CriticTest extends TestCase
         $response = $this->postJson('/api/critics', $json);
 
         $response->assertStatus(UNAUTHORIZED);
-
         $this->assertDatabaseMissing('critics', [
             'user_id' => $json['user_id'],
             'film_id' => $json['film_id']
@@ -110,7 +101,6 @@ class CriticTest extends TestCase
     {
         $this->seed();
         $this->postJson('/api/signin', ['login' => 'adminUser', 'password' => 'adminPassword']);
-
         $json = [
             "user_id" => 1, 
             "film_id" => 7,
@@ -126,7 +116,6 @@ class CriticTest extends TestCase
         } 
 
         $json['film_id'] = THROTTLE_LIMIT + 1;
-
         $response = $this->postJson('/api/signup', $json);
         $response->assertStatus(TOO_MANY_REQUESTS);
     }
