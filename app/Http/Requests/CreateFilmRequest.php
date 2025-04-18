@@ -23,7 +23,7 @@ class CreateFilmRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:50', 
-            'release_year' => 'required|year',
+            'release_year' => 'required|integer',
             'length' => 'required|integer',
             'description' => 'required|string',
             'rating' => 'required|string|max:5',
