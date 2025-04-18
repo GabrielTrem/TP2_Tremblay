@@ -23,9 +23,13 @@ class UserSeeder extends Seeder
             'role_id' => 2
         ]);
 
-        User::factory(3)->state([
-            'password' => Hash::make('password123'),
+        User::create([
+            'login' => 'user',
+            'password' => Hash::make('password'),
+            'email' => 'user@gmail.com',
+            'last_name' => 'Jacob',
+            'first_name' => 'Noel',
             'role_id' => 1
-        ])->create();
+        ]);
     }
 }

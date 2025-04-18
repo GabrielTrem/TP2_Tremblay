@@ -22,6 +22,9 @@ define('SERVER_ERROR', 500);
 //Pagination
 define('SEARCH_PAGINATION', 20);
 
+//Throttle
+define('THROTTLE_LIMIT', 60);
+
 /** * 
  * @OA\Info(title="Films API TP2 Partie 1", version="0.1") 
  * @OA\SecurityScheme(
