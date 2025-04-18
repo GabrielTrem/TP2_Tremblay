@@ -16,7 +16,6 @@ class ActorResource extends JsonResource
     {
         return 
         [   
-        
             'last_name' => $this->last_name,
             'first_name' => $this->first_name,
             'birthdate' => $this->birthdate

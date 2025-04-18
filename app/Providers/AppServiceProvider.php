@@ -15,9 +15,9 @@ use App\Repository\Eloquent\CriticRepository;
 use App\Repository\Eloquent\UserRepository;
 use App\Repository\Eloquent\RoleRepository;
 use App\Models\Film;
-use APp\Models\Critic;
-use APp\Models\User;
-use APp\Models\Role;
+use App\Models\Critic;
+use App\Models\User;
+use App\Models\Role;
 
 class AppServiceProvider extends ServiceProvider
 {

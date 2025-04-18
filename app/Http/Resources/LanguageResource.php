@@ -17,7 +17,6 @@ class LanguageResource extends JsonResource
     {
         return
         [
-          
             'name' => $this->name,          
         ];
     }

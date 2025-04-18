@@ -14,6 +14,7 @@ define('NO_CONTENT', 204);
 define('UNAUTHORIZED', 401);
 define('FORBIDDEN', 403);
 define('NOT_FOUND', 404);
+define('CONFLICT', 409);
 define('INVALID_DATA', 422);
 define("TOO_MANY_REQUESTS", 429);
 define('SERVER_ERROR', 500);

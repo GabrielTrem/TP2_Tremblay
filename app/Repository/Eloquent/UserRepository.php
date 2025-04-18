@@ -7,16 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
-    public function updatePassword(int $id, string $newPassword)
+    public function userHasCriticForFilm(string $user_id, string $film_id)
     {
-        $item = $this->model->findOrFail($id);
-        $item->update(['password' => $newPassword]);
-    }
-
-    public function getCriticByFilmId(int $id)
-    {
-        $critics = $this->model->critics();
-        return $critics->where('film_id', $id)->first();
+        $user = $this->model->findOrFail($user_id);
+        $critics = $user->critics();
+        return $critics->where('film_id', $film_id)->exists();
     }
 }
 
