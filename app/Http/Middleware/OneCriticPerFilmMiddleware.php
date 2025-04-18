@@ -28,7 +28,7 @@ class OneCriticPerFilmMiddleware
             }
             return $next($request);
         }
-        catch(QueryException $ex){
+        catch(ModelNotFoundException $ex){
             abort(NOT_FOUND, "User Not Found");
         } 
         catch(AlreadyExistingCriticOnFilmException $ex){
