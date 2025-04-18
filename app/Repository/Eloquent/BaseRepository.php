@@ -52,7 +52,8 @@ class BaseRepository implements RepositoryInterface
     public function update(int $id, array $content) : Model
     {
         $item = $this->model->findOrFail($id);
-        return $item->update($content);
+        $item->update($content);
+        return $item;
     }
 
     public function delete(int $id)
