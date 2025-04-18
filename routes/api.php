@@ -18,7 +18,6 @@ Route::middleware('throttle:60,1')->group( function(){
         Route::get('/user', 'App\Http\Controllers\UserController@show');
         Route::patch('/user', 'App\Http\Controllers\UserController@update');
     });
-    
 });
 
 Route::middleware('throttle:5,1')->group( function(){
