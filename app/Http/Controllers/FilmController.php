@@ -55,7 +55,7 @@ class FilmController extends Controller
     public function destroy(string $id)
     {
         try {
-            $this->filmRepository->deleteFilmAndCritics($id);
+            $this->filmRepository->deleteFilmInCascade($id);
             return response()->noContent();
         } catch (QueryException $ex) {
             abort(NOT_FOUND, 'Film Not Found');

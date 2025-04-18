@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Repository\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -31,13 +32,10 @@ class UserController extends Controller
     public function update(Request $request)
     {
         try{
-            $user = Auth::user();
-            $validatedData =$request->validated();
-            $updatedUser = $userRepository->update($id, [ 'password' => Hash::make($validatedData['password'])]);
-            return (new UserResource($updatedUser))->response()->setStatusCode(OK);
-        }
-        catch(QueryException $ex){
-            abort(NOT_FOUND, "User Not Found");
+            $userId = Auth::user()->id;
+            $validatedData =$request->all();
+            $user = $this->userRepository->update($userId, [ 'password' => Hash::make($validatedData['password'])]);
+            return (new UserResource($user))->response()->setStatusCode(OK);
         }
         catch(Exception $ex){
             abort(SERVER_ERROR, $ex->getMessage());

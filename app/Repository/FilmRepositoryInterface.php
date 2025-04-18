@@ -6,7 +6,7 @@ use App\Repository\RepositoryInterface;
 
 interface FilmRepositoryInterface extends RepositoryInterface
 {
-    function deleteFilmAndCritics(string $id);
+    public function deleteFilmInCascade(string $id);
 }
 
 ?>
