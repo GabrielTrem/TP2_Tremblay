@@ -29,7 +29,7 @@ class FilmController extends Controller
     {
         try
         {
-            $film = $this->filmRepository->create($request->validated());
+            $film = $this->filmRepository->create($request->all());
             return (new FilmResource($film))->response()->setStatusCode(CREATED);
         }
         catch(Exception $ex)
