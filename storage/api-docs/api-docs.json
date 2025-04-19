@@ -203,6 +203,87 @@
                     }
                 ]
             }
+        },
+        "/api/films": {
+            "post": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Create a new film",
+                "operationId": "ce1501bac824524d1e4706075650bf11",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "release_year",
+                                    "length",
+                                    "description",
+                                    "rating",
+                                    "language_id",
+                                    "special_features",
+                                    "image"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "maxLength": 50
+                                    },
+                                    "release_year": {
+                                        "type": "integer"
+                                    },
+                                    "length": {
+                                        "type": "integer"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "rating": {
+                                        "type": "string",
+                                        "maxLength": 5
+                                    },
+                                    "language_id": {
+                                        "type": "integer"
+                                    },
+                                    "special_features": {
+                                        "type": "string",
+                                        "maxLength": 200
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "maxLength": 40
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Language Not Found"
+                    },
+                    "422": {
+                        "description": "Invalid data"
+                    },
+                    "429": {
+                        "description": "Too Many Requests"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -222,6 +303,10 @@
         {
             "name": "Critics",
             "description": "Critics"
+        },
+        {
+            "name": "Films",
+            "description": "Films"
         }
     ]
 }
