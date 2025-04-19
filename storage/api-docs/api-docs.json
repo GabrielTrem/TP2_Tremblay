@@ -141,6 +141,68 @@
                     }
                 ]
             }
+        },
+        "/api/critics": {
+            "post": {
+                "tags": [
+                    "Critics"
+                ],
+                "summary": "Create a new critic",
+                "operationId": "5152963e9c4be1ec4d595192a682ad53",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "score",
+                                    "comment",
+                                    "user_id",
+                                    "film_id"
+                                ],
+                                "properties": {
+                                    "score": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "comment": {
+                                        "type": "string"
+                                    },
+                                    "user_id": {
+                                        "type": "integer"
+                                    },
+                                    "film_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Sucessful"
+                    },
+                    "404": {
+                        "description": "Movie or User Not Found"
+                    },
+                    "409": {
+                        "description": "Existing Critic On Specific Movie"
+                    },
+                    "422": {
+                        "description": "Invalid data"
+                    },
+                    "429": {
+                        "description": "Too Many Requests"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -156,6 +218,10 @@
         {
             "name": "Authentication",
             "description": "Authentication"
+        },
+        {
+            "name": "Critics",
+            "description": "Critics"
         }
     ]
 }
