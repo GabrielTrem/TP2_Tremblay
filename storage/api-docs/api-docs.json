@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Films API TP2 Partie 1",
-        "version": "0.1"
+        "title": "Films API TP2 Partie 2",
+        "version": "1.0"
     },
     "paths": {
         "/api/signup": {
@@ -141,6 +141,367 @@
                     }
                 ]
             }
+        },
+        "/api/critics": {
+            "post": {
+                "tags": [
+                    "Critics"
+                ],
+                "summary": "Create a new critic",
+                "operationId": "5152963e9c4be1ec4d595192a682ad53",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "score",
+                                    "comment",
+                                    "user_id",
+                                    "film_id"
+                                ],
+                                "properties": {
+                                    "score": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "comment": {
+                                        "type": "string"
+                                    },
+                                    "user_id": {
+                                        "type": "integer"
+                                    },
+                                    "film_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Sucessful"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Movie or User Not Found"
+                    },
+                    "409": {
+                        "description": "Existing Critic On Specific Movie"
+                    },
+                    "422": {
+                        "description": "Invalid data"
+                    },
+                    "429": {
+                        "description": "Too Many Requests"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/films": {
+            "post": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Create a new film",
+                "operationId": "ce1501bac824524d1e4706075650bf11",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "release_year",
+                                    "length",
+                                    "description",
+                                    "rating",
+                                    "language_id",
+                                    "special_features",
+                                    "image"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "maxLength": 50
+                                    },
+                                    "release_year": {
+                                        "type": "integer"
+                                    },
+                                    "length": {
+                                        "type": "integer"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "rating": {
+                                        "type": "string",
+                                        "maxLength": 5
+                                    },
+                                    "language_id": {
+                                        "type": "integer"
+                                    },
+                                    "special_features": {
+                                        "type": "string",
+                                        "maxLength": 200
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "maxLength": 40
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Language Not Found"
+                    },
+                    "422": {
+                        "description": "Invalid data"
+                    },
+                    "429": {
+                        "description": "Too Many Requests"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/films/{film_id}": {
+            "put": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Update an existing film",
+                "operationId": "b650e9c8f4388d690532e75d2456f0d2",
+                "parameters": [
+                    {
+                        "name": "film_id",
+                        "in": "path",
+                        "description": "film id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "release_year",
+                                    "length",
+                                    "description",
+                                    "rating",
+                                    "language_id",
+                                    "special_features",
+                                    "image"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "maxLength": 50
+                                    },
+                                    "release_year": {
+                                        "type": "integer"
+                                    },
+                                    "length": {
+                                        "type": "integer"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "rating": {
+                                        "type": "string",
+                                        "maxLength": 5
+                                    },
+                                    "language_id": {
+                                        "type": "integer"
+                                    },
+                                    "special_features": {
+                                        "type": "string",
+                                        "maxLength": 200
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "maxLength": 40
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Language Not Found"
+                    },
+                    "422": {
+                        "description": "Invalid data"
+                    },
+                    "429": {
+                        "description": "Too Many Requests"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/film/{film_id}": {
+            "delete": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Delete an existing film",
+                "operationId": "aec0b07dd6898f6705d5d75eea2727d4",
+                "parameters": [
+                    {
+                        "name": "film_id",
+                        "in": "path",
+                        "description": "film id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Film Not Found"
+                    },
+                    "429": {
+                        "description": "Too Many Requests"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/user": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get current user",
+                "operationId": "9cd1cee912e0176094a7ec83cc9b432f",
+                "responses": {
+                    "200": {
+                        "description": "Successful"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "429": {
+                        "description": "Too Many Requests"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update password of current user",
+                "operationId": "ea88adacb890b864b59bcce5aff2473d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "password": {
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "maxLength": 255
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Invalid data"
+                    },
+                    "429": {
+                        "description": "Too Many Requests"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -156,6 +517,18 @@
         {
             "name": "Authentication",
             "description": "Authentication"
+        },
+        {
+            "name": "Critics",
+            "description": "Critics"
+        },
+        {
+            "name": "Films",
+            "description": "Films"
+        },
+        {
+            "name": "Users",
+            "description": "Users"
         }
     ]
 }

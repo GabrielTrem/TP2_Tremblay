@@ -17,6 +17,26 @@ class UserController extends Controller
         $this->userRepository = $userRepository;
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/user",
+     *     tags={"Users"},
+     *     summary="Get current user",
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful",
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *     @OA\Response(
+     *         response=429,
+     *         description="Too Many Requests",
+     *     )
+     * )
+     */
     public function show()
     {
         try
@@ -30,6 +50,38 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * @OA\Patch(
+     *     path="/api/user",
+     *     tags={"Users"},
+     *     summary="Update password of current user",
+     *     security={{"bearerAuth":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"password", "password_confirmation"},
+     *             @OA\Property(property="password", type="string", maxLength=255),
+     *             @OA\Property(property="password_confirmation", type="string", maxLength=255),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful"
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *     @OA\Response(
+     *         response=422, 
+     *         description="Invalid data"
+     *     ),
+     *     @OA\Response(
+     *         response=429,
+     *         description="Too Many Requests"
+     *     )
+     * )
+     */
     public function update(UpdateUserPasswordRequest $request)
     {
         try{

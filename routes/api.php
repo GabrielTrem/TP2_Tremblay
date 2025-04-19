@@ -4,8 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\OneCriticPerFilmMiddleware;
-//For test
-Route::get('/films', 'App\Http\Controllers\FilmController@index');
 
 Route::middleware('throttle:60,1')->group( function(){ 
     Route::middleware('auth:sanctum')->group( function(){ 
