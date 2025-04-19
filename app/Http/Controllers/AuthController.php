@@ -9,9 +9,16 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\LoginUserRequest;
+use App\Repository\RoleRepositoryInterface;
 
 class AuthController extends Controller
 {
+    private RoleRepositoryInterface $roleRepository;
+
+    public function __construct(RoleRepositoryInterface $roleRepository){
+        $this->roleRepository = $roleRepository;
+    }
+
     /**
      * @OA\Post(
      *     path="/api/signup",
@@ -51,7 +58,8 @@ class AuthController extends Controller
             'password' => Hash::make($validatedData['password']),
             'email' => $validatedData['email'],
             'last_name' => $validatedData['last_name'],
-            'first_name' => $validatedData['first_name']
+            'first_name' => $validatedData['first_name'],
+            'role_id' => $this->roleRepository->getIdByName('user')
         ]);
         return (new UserResource($user))->response()->setStatusCode(CREATED);
     }

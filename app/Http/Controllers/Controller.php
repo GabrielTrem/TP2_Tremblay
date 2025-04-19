@@ -23,7 +23,7 @@ define('SERVER_ERROR', 500);
 define('SEARCH_PAGINATION', 20);
 
 /** * 
- * @OA\Info(title="Films API TP2 Partie 1", version="0.1") 
+ * @OA\Info(title="Films API TP2 Partie 2", version="1.0") 
  * @OA\SecurityScheme(
  *     type="http",
  *     securityScheme="bearerAuth",
