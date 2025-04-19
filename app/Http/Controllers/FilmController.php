@@ -18,26 +18,6 @@ class FilmController extends Controller
     }
 
     /**
-     * @OA\Get(
-     *     path="/api/films",
-     *     summary="Get all films",
-     *     tags={"Films"},
-     *     @OA\Response(
-     *         response=200,
-     *         description="Successful",
-     *     )
-     * )
-     */
-    public function index(){
-        try{
-            return $this->filmRepository->getAll();
-        }
-        catch (Exception $ex){
-            abort(SERVER_ERROR, $ex->getMessage());
-        }
-    }
-
-    /**
      * @OA\Post(
      *     path="/api/films",
      *     tags={"Films"},

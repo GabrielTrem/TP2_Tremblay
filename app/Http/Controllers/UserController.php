@@ -17,6 +17,25 @@ class UserController extends Controller
         $this->userRepository = $userRepository;
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/user",
+     *     summary="Get current user",
+     *     tags={"Users"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful",
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *     @OA\Response(
+     *         response=429,
+     *         description="Too Many Requests",
+     *     )
+     * )
+     */
     public function show()
     {
         try

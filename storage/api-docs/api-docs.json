@@ -205,18 +205,6 @@
             }
         },
         "/api/films": {
-            "get": {
-                "tags": [
-                    "Films"
-                ],
-                "summary": "Get all films",
-                "operationId": "271e474415d2f29bf3c163247c5f4639",
-                "responses": {
-                    "200": {
-                        "description": "Successful"
-                    }
-                }
-            },
             "post": {
                 "tags": [
                     "Films"
@@ -427,6 +415,26 @@
                     }
                 ]
             }
+        },
+        "/api/user": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get current user",
+                "operationId": "9cd1cee912e0176094a7ec83cc9b432f",
+                "responses": {
+                    "200": {
+                        "description": "Successful"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "429": {
+                        "description": "Too Many Requests"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -450,6 +458,10 @@
         {
             "name": "Films",
             "description": "Films"
+        },
+        {
+            "name": "Users",
+            "description": "Users"
         }
     ]
 }
