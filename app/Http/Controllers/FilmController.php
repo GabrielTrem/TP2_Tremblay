@@ -83,7 +83,7 @@ class FilmController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/films",
+     *     path="/api/films/{film_id}",
      *     tags={"Films"},
      *     summary="Update an existing film",
      *     security={{"bearerAuth":{}}},
@@ -144,6 +144,37 @@ class FilmController extends Controller
         }
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/api/film/{film_id}",
+     *     tags={"Films"},
+     *     summary="Delete an existing film",
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *         name="film_id",
+     *         description="film id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="No Content"
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Forbidden"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Film Not Found"
+     *     ),
+     *     @OA\Response(
+     *         response=429,
+     *         description="Too Many Requests"
+     *     )
+     * )
+     */
     public function destroy(string $id)
     {
         try {

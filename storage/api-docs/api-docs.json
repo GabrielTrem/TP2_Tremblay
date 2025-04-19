@@ -205,12 +205,93 @@
             }
         },
         "/api/films": {
+            "post": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Create a new film",
+                "operationId": "ce1501bac824524d1e4706075650bf11",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "release_year",
+                                    "length",
+                                    "description",
+                                    "rating",
+                                    "language_id",
+                                    "special_features",
+                                    "image"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "maxLength": 50
+                                    },
+                                    "release_year": {
+                                        "type": "integer"
+                                    },
+                                    "length": {
+                                        "type": "integer"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "rating": {
+                                        "type": "string",
+                                        "maxLength": 5
+                                    },
+                                    "language_id": {
+                                        "type": "integer"
+                                    },
+                                    "special_features": {
+                                        "type": "string",
+                                        "maxLength": 200
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "maxLength": 40
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Language Not Found"
+                    },
+                    "422": {
+                        "description": "Invalid data"
+                    },
+                    "429": {
+                        "description": "Too Many Requests"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/films/{film_id}": {
             "put": {
                 "tags": [
                     "Films"
                 ],
                 "summary": "Update an existing film",
-                "operationId": "20640505f3d9c7775a3a76058499ec0a",
+                "operationId": "b650e9c8f4388d690532e75d2456f0d2",
                 "parameters": [
                     {
                         "name": "film_id",
@@ -294,75 +375,35 @@
                         "bearerAuth": []
                     }
                 ]
-            },
-            "post": {
+            }
+        },
+        "/api/film/{film_id}": {
+            "delete": {
                 "tags": [
                     "Films"
                 ],
-                "summary": "Create a new film",
-                "operationId": "ce1501bac824524d1e4706075650bf11",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "title",
-                                    "release_year",
-                                    "length",
-                                    "description",
-                                    "rating",
-                                    "language_id",
-                                    "special_features",
-                                    "image"
-                                ],
-                                "properties": {
-                                    "title": {
-                                        "type": "string",
-                                        "maxLength": 50
-                                    },
-                                    "release_year": {
-                                        "type": "integer"
-                                    },
-                                    "length": {
-                                        "type": "integer"
-                                    },
-                                    "description": {
-                                        "type": "string"
-                                    },
-                                    "rating": {
-                                        "type": "string",
-                                        "maxLength": 5
-                                    },
-                                    "language_id": {
-                                        "type": "integer"
-                                    },
-                                    "special_features": {
-                                        "type": "string",
-                                        "maxLength": 200
-                                    },
-                                    "image": {
-                                        "type": "string",
-                                        "maxLength": 40
-                                    }
-                                },
-                                "type": "object"
-                            }
+                "summary": "Delete an existing film",
+                "operationId": "aec0b07dd6898f6705d5d75eea2727d4",
+                "parameters": [
+                    {
+                        "name": "film_id",
+                        "in": "path",
+                        "description": "film id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
                         }
                     }
-                },
+                ],
                 "responses": {
-                    "201": {
-                        "description": "Successful"
+                    "204": {
+                        "description": "No Content"
                     },
                     "403": {
                         "description": "Forbidden"
                     },
                     "404": {
-                        "description": "Language Not Found"
-                    },
-                    "422": {
-                        "description": "Invalid data"
+                        "description": "Film Not Found"
                     },
                     "429": {
                         "description": "Too Many Requests"
