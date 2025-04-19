@@ -37,6 +37,10 @@ class CriticController extends Controller
      *         description="Sucessful"
      *     ),
      *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *     @OA\Response(
      *         response=404,
      *         description="Movie or User Not Found"
      *     ),

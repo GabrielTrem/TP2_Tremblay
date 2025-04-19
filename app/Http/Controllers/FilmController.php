@@ -42,6 +42,10 @@ class FilmController extends Controller
      *         description="Successful"
      *     ),
      *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *     @OA\Response(
      *         response=403,
      *         description="Forbidden"
      *     ),
@@ -104,6 +108,10 @@ class FilmController extends Controller
      *         description="Successful"
      *     ),
      *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *     @OA\Response(
      *         response=403,
      *         description="Forbidden"
      *     ),
@@ -151,6 +159,10 @@ class FilmController extends Controller
      *     @OA\Response(
      *         response=204,
      *         description="No Content"
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
      *     ),
      *     @OA\Response(
      *         response=403,
