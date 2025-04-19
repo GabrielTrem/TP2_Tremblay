@@ -205,6 +205,96 @@
             }
         },
         "/api/films": {
+            "put": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Update an existing film",
+                "operationId": "20640505f3d9c7775a3a76058499ec0a",
+                "parameters": [
+                    {
+                        "name": "film_id",
+                        "in": "path",
+                        "description": "film id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "release_year",
+                                    "length",
+                                    "description",
+                                    "rating",
+                                    "language_id",
+                                    "special_features",
+                                    "image"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "maxLength": 50
+                                    },
+                                    "release_year": {
+                                        "type": "integer"
+                                    },
+                                    "length": {
+                                        "type": "integer"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "rating": {
+                                        "type": "string",
+                                        "maxLength": 5
+                                    },
+                                    "language_id": {
+                                        "type": "integer"
+                                    },
+                                    "special_features": {
+                                        "type": "string",
+                                        "maxLength": 200
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "maxLength": 40
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Language Not Found"
+                    },
+                    "422": {
+                        "description": "Invalid data"
+                    },
+                    "429": {
+                        "description": "Too Many Requests"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
             "post": {
                 "tags": [
                     "Films"
