@@ -17,6 +17,17 @@ class FilmController extends Controller
         $this->filmRepository = $filmRepository;
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/films",
+     *     summary="Get all films",
+     *     tags={"Films"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful",
+     *     )
+     * )
+     */
     public function index(){
         try{
             return $this->filmRepository->getAll();

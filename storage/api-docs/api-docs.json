@@ -205,6 +205,18 @@
             }
         },
         "/api/films": {
+            "get": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Get all films",
+                "operationId": "271e474415d2f29bf3c163247c5f4639",
+                "responses": {
+                    "200": {
+                        "description": "Successful"
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "Films"
